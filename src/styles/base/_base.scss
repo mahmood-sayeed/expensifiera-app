@@ -1,0 +1,21 @@
+//1 rem = 16px
+//filename starts with _ meaning partial
+
+html {
+    font-size: 62.5%;
+}
+
+//made rem base 10. which is - 2.2 rem = 22 px
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: $m-size;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+}
