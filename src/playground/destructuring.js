@@ -1,5 +1,7 @@
 console.log('destructuring');
 
+// Object destructuing
+
 const person = {
     name: 'Mathew',
     age: 35,
@@ -37,3 +39,21 @@ const { name: publisherName = 'Self-Published' } = book.publisher;
 
 console.log(publisherName);
 
+
+
+//Array destructuring
+
+const address = ['1299 Jupiter Street', 'Berlin', 'Germany', '19146'];
+
+//const [, city, country] = address;      //variable in order.. last can be left off if not needed like zip
+//const [, , country] = address;
+
+const [, city, country = 'New York'] = address; //giving default if does not exist
+
+console.log(`you are in ${city} ${country}.`);
+
+
+const item = ['Coffee (hot)', '$2.00', '$2.50', '$2.75'];
+const [itemName, , mediumPrice] = item;
+
+console.log(`A medium ${itemName} costs ${mediumPrice}.`);
