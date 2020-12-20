@@ -1,7 +1,3 @@
-//moment.js, airbnb.io/react-dates      
-//for datepicker
-//react-addons-shallow-compare   a dependency used by react-dates. might not be supported in future
-
 import React from 'react';
 import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
@@ -56,10 +52,10 @@ export default class ExpenseForm extends React.Component {
                         onChange={this.onAmountChange}
                     />
                     <SingleDatePicker 
-                        date={this.state.createdAt}  //mandatory
-                        onDateChange={this.onDateChange}  //mandatory
-                        focused={this.state.calendarFocused}  //mandatory
-                        onFocusChange={this.onFocusChange}  //mandatory
+                        date={this.state.createdAt}  
+                        onDateChange={this.onDateChange}  
+                        focused={this.state.calendarFocused}  
+                        onFocusChange={this.onFocusChange}  
                         numberOfMonths={1}
                         isOutsideRange={() => false}
                     />
