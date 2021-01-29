@@ -15,10 +15,59 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
+//to fetch data ..1
+// database.ref()      //can put ref as 'location' or 'location/city' for specific fetch
+//     .once('value')
+//     .then((snapshot) => {
+//         const val = snapshot.val();
+//         console.log(val);
+//     })
+//     .catch((e) => {
+//         console.log('Error fetching data', e);
+//     });
+
+//fetch data ...2   This has a callback every time data updates like subscription
+database.ref().on('value', (snapshot) => {
+    console.log(snapshot.val());
+});
+
+setTimeout(() => {
+    database.ref('age').set(29);
+}, 3500);
+
+setTimeout(() => {
+    database.ref().off();       //unsubscribe
+}, 7000);
+
+
+const onValueChange = database.ref().on('value', (snapshot) => {
+    console.log(snapshot.val());
+}, (e) => {
+    console.log('Error with data fetching', e);
+});
+
+setTimeout(() => {
+    database.ref().off(onValueChange);       //unsubscribe single subs
+}, 9000);
+
+setTimeout(() => {
+    database.ref('age').set(30);
+}, 10500);
+
+database.ref().on('value', (snapshot) => {
+    const val = snapshot.val();
+    console.log(`${val.name} is a ${val.job.title} at ${val.job.company}`);
+});
+
+//to set data
 // database.ref().set({
 //     name: 'Sayeed Mahmood',
 //     age: 20,
-//     isSingle: true,
+//     stressLevel: 4,
+//     job: {
+//         title: 'Software Developer',
+//         company: 'Google'
+//     },
 //     location: {
 //         city: 'Mumbai',
 //         country: 'India'
@@ -29,8 +78,28 @@ const database = firebase.database();
 //     console.log('this failed', e);
 // });
 
-// database.ref().set('This is my data');
+//to remove --2
+// database.ref('isSingle').set(null);
 
-// database.ref('age').set(21);
-// database.ref('location/city').set('Pune');
+//to remove --1
+// database.ref('isSingle')
+//     .remove()
+//     .then(() => {
+//         console.log('Data was removed');
+//     }).catch((e) => {
+//         console.log('Did not remove data', e);
+//     });
 
+//to update
+// database.ref().update({
+//     name: 'Hashir',
+//     age: '23',
+//     job: 'Software Developer',
+//     isSingle: null
+// });
+
+// database.ref().update({
+//     stressLevel: 9,
+//     'job/company': 'Amazon',
+//     'location/city': 'Seattle'
+// });
